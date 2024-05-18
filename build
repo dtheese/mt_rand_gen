@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+
+declare -r EXECUTABLE_NAME=$(basename $(pwd))
+declare -r HEADER_TEST_DIR=header_tests
+
+mkdir -p $HEADER_TEST_DIR
+
+for ONE_FILE in $(ls *.h 2> /dev/null || true)
+do
+   FILENAME_BASE=$(basename $ONE_FILE)
+   FILENAME_NO_SUFFIX=${FILENAME_BASE%.*}
+   HEADER_TEST=$HEADER_TEST_DIR/${FILENAME_NO_SUFFIX}_header_test.cpp
+
+   if [[ ! -f $HEADER_TEST ]]; then
+      echo "#include \"$FILENAME_BASE\"" >  $HEADER_TEST
+      echo ""                            >> $HEADER_TEST
+      echo "int main()"                  >> $HEADER_TEST
+      echo "{"                           >> $HEADER_TEST
+      echo "}"                           >> $HEADER_TEST
+   fi
+done
+
+cd $HEADER_TEST_DIR
+
+for ONE_FILE in $(ls *.cpp 2> /dev/null || true)
+do
+   g++ -std=c++2a -pthread -Wall -Wpedantic -Wextra -Ofast -c -I .. $ONE_FILE
+done
+
+rm -f *.o *.cpp
+
+cd ..
+rmdir $HEADER_TEST_DIR
+
+rm -f $EXECUTABLE_NAME
+g++ -std=c++2a -pthread -Wall -Wpedantic -Wextra -Ofast -o $EXECUTABLE_NAME *.cpp
+
+if [[ -f $EXECUTABLE_NAME ]]; then
+   sed -i "3s/^.*$/$EXECUTABLE_NAME/" .gitignore
+   git commit -m "Update .gitignore" .gitignore >& /dev/null || true
+fi
+
+exit 0

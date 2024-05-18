@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+
+declare -r EXECUTABLE_NAME=$(basename $(pwd))
+
+killall $EXECUTABLE_NAME || true
+
+exit 0

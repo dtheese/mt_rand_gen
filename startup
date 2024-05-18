@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+
+declare -r EXECUTABLE_NAME=$(basename $(pwd))
+declare -r NOHUP_FILE=nohup_${EXECUTABLE_NAME}.out
+
+# Stop any running instances
+killall $EXECUTABLE_NAME 2> /dev/null || true
+
+rm -f $NOHUP_FILE 
+date > $NOHUP_FILE
+nohup $EXECUTABLE_NAME >> $NOHUP_FILE 2> /dev/null &
+
+echo "To monitor progress, execute:"
+echo "tail -f -n +1 $NOHUP_FILE"
+echo ""
+
+exit 0

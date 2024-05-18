@@ -1,0 +1,6 @@
+# Keep the name of the generated executable on line 3 since the build script
+# automatically updates this line after a successful build.
+mt_rand_gen
+
+nohup*
+*.swp

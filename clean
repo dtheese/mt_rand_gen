@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -o nounset
+set -o errexit
+set -o pipefail
+
+declare -r EXECUTABLE_NAME=$(basename $(pwd))
+declare -r NOHUP_FILE=nohup_${EXECUTABLE_NAME}.out
+
+rm -f $EXECUTABLE_NAME $NOHUP_FILE
+
+exit 0
