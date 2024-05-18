@@ -28,7 +28,7 @@ cd $HEADER_TEST_DIR
 
 for ONE_FILE in $(ls *.cpp 2> /dev/null || true)
 do
-   g++ -std=c++2a -pthread -Wall -Wpedantic -Wextra -Ofast -c -I .. $ONE_FILE
+   g++ -std=c++20 -pthread -Wall -Wpedantic -Wextra -Ofast -c -I .. $ONE_FILE
 done
 
 rm -f *.o *.cpp
@@ -37,7 +37,7 @@ cd ..
 rmdir $HEADER_TEST_DIR
 
 rm -f $EXECUTABLE_NAME
-g++ -std=c++2a -pthread -Wall -Wpedantic -Wextra -Ofast -o $EXECUTABLE_NAME *.cpp
+g++ -std=c++20 -pthread -Wall -Wpedantic -Wextra -Ofast -o $EXECUTABLE_NAME *.cpp
 
 if [[ -f $EXECUTABLE_NAME ]]; then
    sed -i "3s/^.*$/$EXECUTABLE_NAME/" .gitignore
