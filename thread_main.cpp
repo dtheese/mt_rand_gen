@@ -32,10 +32,13 @@ void thread_main()
             thread_update_made = true;
          }
 
-         if (one_num < min_n)
+         if constexpr (COUNT_NEW_MAX_AND_NEW_MIN)
          {
-            min_n = one_num;
-            thread_update_made = true;
+            if (one_num < min_n)
+            {
+               min_n = one_num;
+               thread_update_made = true;
+            }
          }
 
          if (thread_update_made)
@@ -54,10 +57,13 @@ void thread_main()
                screen_update_needed = true;
             }
 
-            if (one_num < global_min_n)
+            if constexpr (COUNT_NEW_MAX_AND_NEW_MIN)
             {
-               global_min_n = one_num;
-               screen_update_needed = true;
+               if (one_num < global_min_n)
+               {
+                  global_min_n = one_num;
+                  screen_update_needed = true;
+               }
             }
 
             if (screen_update_needed)

@@ -1,4 +1,5 @@
 #include <chrono>
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <mutex>
@@ -30,6 +31,16 @@ void update_screen()
                                                           };
 
    my_uint_t max_diff{numeric_limits<my_uint_t>::max() - global_max_n};
+   long double global_total_count_ld{static_cast<long double>(global_total_count)};
+
+   long double expected_update_count{
+                                       log(global_total_count_ld) + 0.57721L +
+                                       (
+                                          global_total_count > 50 ?
+                                          0.0L                    :
+                                          1.0L / (2.0L * global_total_count_ld)
+                                       )
+                                    };
 
    chrono::time_point<chrono::steady_clock> time_of_current_update{
                                                  chrono::steady_clock::now()
@@ -48,8 +59,9 @@ void update_screen()
    else
       cout << "\33[2K\r";
 
-   cout << "updates=" << global_update_count << ","
-        << "total=" << global_total_count << ","
+   cout << "total=" << global_total_count << ","
+        << "actual_updates=" << global_update_count << ","
+        << fixed << setprecision(2) << "expected_updates=" << expected_update_count << ","
         << "min=" << "\033[1m" << global_min_n << "\033[0m" << ","
         << "max=" << global_max_n << ","
         << "max_diff=" << "\033[1m" << max_diff << "\033[0m" << ","

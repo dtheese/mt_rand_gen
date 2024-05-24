@@ -8,6 +8,7 @@ using namespace std;
 
 #include "fundamental_types.h"
 
+constexpr bool COUNT_NEW_MAX_AND_NEW_MIN{false};
 constexpr my_uint_t GLOBAL_COUNT_FULL_UPDATE_PERIOD{1000};
 constexpr my_uint_t SCREEN_UPDATE_PERIOD{10'000'000'000};
 
