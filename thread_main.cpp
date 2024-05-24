@@ -20,7 +20,7 @@ void thread_main()
    {
       my_uint_t i_last_update{0};
 
-      for (my_uint_t i{1}; i <= GLOBAL_COUNT_UPDATE_PERIOD; ++i)
+      for (my_uint_t i{1}; i <= GLOBAL_COUNT_FULL_UPDATE_PERIOD; ++i)
       {
          bool thread_update_made{false};
 
@@ -73,7 +73,7 @@ void thread_main()
 
       {
          lock_guard<recursive_mutex> lg{global_total_count_mutex};
-         global_total_count += (GLOBAL_COUNT_UPDATE_PERIOD - i_last_update);
+         global_total_count += (GLOBAL_COUNT_FULL_UPDATE_PERIOD - i_last_update);
 
          if (global_total_count % SCREEN_UPDATE_PERIOD == 0)
             update_screen();
