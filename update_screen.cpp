@@ -39,10 +39,11 @@ void update_screen()
    else
       cout << "\33[2K\r";
 
-   cout << "total=" << global_total_count << ","
-        << "updates=" << global_update_count << ","
-        << "min=" << global_min_n << ","
-        << "max=" << max_diff << ","
+   cout << "updates=" << global_update_count << ","
+        << "total=" << global_total_count << ","
+        << "min=" << "\033[1m" << global_min_n << "\033[0m" << ","
+        << "max=" << global_max_n << ","
+        << "max_diff=" << "\033[1m" << max_diff << "\033[0m" << ","
         << fixed << setprecision(2) << time_taken_h << " hours,"
         << fixed << setprecision(0) << rate << "/s"
         << flush;

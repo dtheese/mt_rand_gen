@@ -9,7 +9,7 @@ using namespace std;
 #include "fundamental_types.h"
 
 constexpr my_uint_t GLOBAL_COUNT_UPDATE_PERIOD{1000};
-constexpr my_uint_t SCREEN_UPDATE_PERIOD{1'000'000'000'000};
+constexpr my_uint_t SCREEN_UPDATE_PERIOD{10'000'000'000};
 
 // SCREEN_UPDATE_PERIOD must be an even multiple of GLOBAL_COUNT_UPDATE_PERIOD
 // or we'll never do periodic updates!
