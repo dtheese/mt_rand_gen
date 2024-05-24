@@ -20,12 +20,21 @@ namespace
 void update_screen()
 {
    lock_guard<mutex> lg_console_mutex{console_mutex};
-   lock_guard<recursive_mutex> lg_global_max_min_update_count_mutex{global_max_min_update_count_mutex};
-   lock_guard<recursive_mutex> lg_global_total_count_mutex{global_total_count_mutex};
+
+   lock_guard<recursive_mutex> lg_global_max_min_update_count_mutex{
+                                         global_max_min_update_count_mutex
+                                                                   };
+
+   lock_guard<recursive_mutex> lg_global_total_count_mutex{
+                                         global_total_count_mutex
+                                                          };
 
    my_uint_t max_diff{numeric_limits<my_uint_t>::max() - global_max_n};
 
-   chrono::time_point<chrono::steady_clock> time_of_current_update{chrono::steady_clock::now()};
+   chrono::time_point<chrono::steady_clock> time_of_current_update{
+                                                 chrono::steady_clock::now()
+                                                                  };
+
    auto ticks_taken{time_of_current_update - time_of_first_update};
    constexpr long double tick_interval{decltype(ticks_taken)::period::den};
 

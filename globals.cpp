@@ -11,7 +11,9 @@ const unsigned int NUM_THREADS{
                                  1
                               };
 
-const chrono::time_point<chrono::steady_clock> time_of_first_update{chrono::steady_clock::now()};
+const chrono::time_point<chrono::steady_clock> time_of_first_update{
+                                                    chrono::steady_clock::now()
+                                                                   };
 
 recursive_mutex global_max_min_update_count_mutex;
 my_uint_t global_min_n{numeric_limits<my_uint_t>::max()};

@@ -40,8 +40,12 @@ void thread_main()
 
          if (thread_update_made)
          {
-            lock_guard<recursive_mutex> lg_global_max_min_update_count_mutex{global_max_min_update_count_mutex};
-            lock_guard<recursive_mutex> lg_global_total_count_mutex{global_total_count_mutex};
+            lock_guard<recursive_mutex> lg_global_max_min_update_count_mutex{
+                                                  global_max_min_update_count_mutex
+                                                                            };
+            lock_guard<recursive_mutex> lg_global_total_count_mutex{
+                                                  global_total_count_mutex
+                                                                   };
             bool screen_update_needed{false};
 
             if (one_num > global_max_n)
