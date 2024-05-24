@@ -18,15 +18,9 @@ void thread_main()
 
    while (true)
    {
-      {
-         lock_guard<recursive_mutex> lg{global_total_count_mutex};
-         global_total_count += GLOBAL_COUNT_UPDATE_PERIOD;
+      my_uint_t i_last_update{0};
 
-         if (global_total_count % SCREEN_UPDATE_PERIOD == 0)
-            update_screen();
-      }
-
-      for (my_uint_t i{0}; i < GLOBAL_COUNT_UPDATE_PERIOD; ++i)
+      for (my_uint_t i{1}; i <= GLOBAL_COUNT_UPDATE_PERIOD; ++i)
       {
          bool thread_update_made{false};
 
@@ -46,7 +40,8 @@ void thread_main()
 
          if (thread_update_made)
          {
-            lock_guard<recursive_mutex> lg{global_max_min_update_count_mutex};
+            lock_guard<recursive_mutex> lg_global_max_min_update_count_mutex{global_max_min_update_count_mutex};
+            lock_guard<recursive_mutex> lg_global_total_count_mutex{global_total_count_mutex};
             bool screen_update_needed{false};
 
             if (one_num > global_max_n)
@@ -64,10 +59,20 @@ void thread_main()
             if (screen_update_needed)
             {
                ++global_update_count;
+               global_total_count += (i - i_last_update);
+               i_last_update = i;
                update_screen();
                global_current_update_count_printed_once = true;
             }
          }
+      }
+
+      {
+         lock_guard<recursive_mutex> lg{global_total_count_mutex};
+         global_total_count += (GLOBAL_COUNT_UPDATE_PERIOD - i_last_update);
+
+         if (global_total_count % SCREEN_UPDATE_PERIOD == 0)
+            update_screen();
       }
    }
 }
