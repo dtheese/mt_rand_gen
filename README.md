@@ -25,12 +25,10 @@ Be aware that if the program is started in the background and if another instanc
 # Constants Referenced
 In what follows, the following constants are referenced:
 - `COUNT_NEW_MAX_AND_NEW_MIN`
-- `GLOBAL_COUNT_FULL_UPDATE_PERIOD`
 - `SCREEN_UPDATE_PERIOD`
 
 These constants are defined in `globals.h`. At the time of this writing, these values are being used:
 - `COUNT_NEW_MAX_AND_NEW_MIN = false`
-- `GLOBAL_COUNT_FULL_UPDATE_PERIOD = 1000`
 - `SCREEN_UPDATE_PERIOD = 10'000'000'000`
 
 `SCREEN_UPDATE_PERIOD` must be an integral multiple of `GLOBAL_COUNT_FULL_UPDATE_PERIOD`. If it is not, a compilation error will result. This is done since periodic updates will not occur if this condition is not met.
