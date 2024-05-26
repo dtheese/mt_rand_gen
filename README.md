@@ -31,8 +31,6 @@ These constants are defined in `globals.h`. At the time of this writing, these v
 - `COUNT_NEW_MAX_AND_NEW_MIN = false`
 - `SCREEN_UPDATE_PERIOD = 10'000'000'000`
 
-`SCREEN_UPDATE_PERIOD` must be an integral multiple of `GLOBAL_COUNT_FULL_UPDATE_PERIOD`. If it is not, a compilation error will result. This is done since periodic updates will not occur if this condition is not met.
-
 The use of these constants will be described below.
 
 # Program Output
