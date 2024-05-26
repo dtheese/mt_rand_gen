@@ -12,7 +12,7 @@ constexpr bool COUNT_NEW_MAX_AND_NEW_MIN{false};
 constexpr my_uint_t GLOBAL_COUNT_FULL_UPDATE_PERIOD{1000};
 constexpr my_uint_t SCREEN_UPDATE_PERIOD{10'000'000'000};
 
-// SCREEN_UPDATE_PERIOD must be an even multiple of GLOBAL_COUNT_UPDATE_PERIOD
+// SCREEN_UPDATE_PERIOD must be an even multiple of GLOBAL_COUNT_FULL_UPDATE_PERIOD
 // or we'll never do periodic updates!
 static_assert(SCREEN_UPDATE_PERIOD % GLOBAL_COUNT_FULL_UPDATE_PERIOD == 0);
 
