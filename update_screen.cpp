@@ -34,12 +34,15 @@ void update_screen()
    long double global_total_count_ld{static_cast<long double>(global_total_count)};
 
    long double expected_update_count{
-                                       log(global_total_count_ld) + 0.57721L +
                                        (
-                                          global_total_count > 50 ?
-                                          0.0L                    :
-                                          1.0L / (2.0L * global_total_count_ld)
-                                       )
+                                          log(global_total_count_ld) + 0.57721L +
+                                          (
+                                             global_total_count > 50 ?
+                                             0.0L                    :
+                                             1.0L / (2.0L * global_total_count_ld)
+                                          )
+                                       ) *
+                                       (COUNT_NEW_MAX_AND_NEW_MIN ? 2.0L : 1.0L)
                                     };
 
    chrono::time_point<chrono::steady_clock> time_of_current_update{
