@@ -28,7 +28,7 @@ In what follows, the following constants are referenced:
 - `SCREEN_UPDATE_PERIOD`
 
 These constants are defined in `globals.h`. At the time of this writing, these values are being used:
-- `COUNT_NEW_MAX_AND_NEW_MIN = false`
+- `COUNT_NEW_MAX_AND_NEW_MIN = true`
 - `SCREEN_UPDATE_PERIOD = 10'000'000'000`
 
 The use of these constants will be described below.
